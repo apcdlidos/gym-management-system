@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import Schedule from "../components/Client/Schedule";
 
 const renderPage = (path) => {
-  console.log(path);
   switch (path) {
     case "/schedule":
       return <Schedule />;
@@ -14,16 +13,13 @@ const renderPage = (path) => {
 const navigate = (setCurrentPage, path) => {
   window.history.pushState({}, "", path);
   setCurrentPage(path);
-  console.log(path);
 };
 
 const Dashboard = () => {
   const [currentPage, setCurrentPage] = useState(window.location.pathname);
 
-  console.log(currentPage);
-
   useEffect(() => {
-    const handlePopState = (e) => {
+    const handlePopState = () => {
       setCurrentPage(window.location.pathname);
     };
     window.addEventListener("popstate", handlePopState);
