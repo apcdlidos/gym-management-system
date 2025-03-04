@@ -1,28 +1,63 @@
 import { useState, useEffect } from "react";
+import Schedule from "../components/Client/Schedule";
 
-import supabase from "../utils/supabase";
-
-async function getSchedule(setTodos) {
-  const { data: schedule } = await supabase.from("schedule").select();
-
-  if (schedule.length > 0) {
-    setTodos(schedule);
+const renderPage = (path) => {
+  console.log(path);
+  switch (path) {
+    case "/schedule":
+      return <Schedule />;
+    default:
+      return <>Dashboard</>;
   }
-}
-function Dashboard() {
-  const [schedule, setSchedule] = useState([]);
+};
+
+const navigate = (setCurrentPage, path) => {
+  window.history.pushState({}, "", path);
+  setCurrentPage(path);
+  console.log(path);
+};
+
+const Dashboard = () => {
+  const [currentPage, setCurrentPage] = useState(window.location.pathname);
+
+  console.log(currentPage);
 
   useEffect(() => {
-    getSchedule(setSchedule);
-  }, []);
+    const handlePopState = (e) => {
+      setCurrentPage(window.location.pathname);
+    };
+    window.addEventListener("popstate", handlePopState);
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  });
 
   return (
     <div>
-      {schedule.map((sched) => (
-        <li key={sched.id}>{sched.available_start}</li>
-      ))}
+      <ul>
+        <li>
+          <button
+            type=""
+            onClick={() => {
+              navigate(setCurrentPage, "/dashboard");
+            }}
+          >
+            Dashboard
+          </button>
+        </li>
+        <li>
+          <button
+            type=""
+            onClick={() => {
+              navigate(setCurrentPage, "/schedule");
+            }}
+          >
+            Schedule
+          </button>
+        </li>
+      </ul>
+      <div>{renderPage(currentPage)} </div>
     </div>
   );
-}
-
+};
 export default Dashboard;
