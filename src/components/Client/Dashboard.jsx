@@ -49,7 +49,7 @@ const Dashboard = () => {
             navigate(setCurrentPage, "/schedule");
           }}
         >
-          Schedule
+          Trainer Schedules
         </button>
       </Navbar>
       <main>{renderPage(currentPage)} </main>
