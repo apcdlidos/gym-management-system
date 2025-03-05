@@ -1,0 +1,18 @@
+.payment-overlay {
+  z-index: 9999;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.payment-modal {
+  position: relative;
+  background: var(--background);
+  padding: 10px 15px;
+}

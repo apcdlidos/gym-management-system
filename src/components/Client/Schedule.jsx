@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "../../styles/Schedule.css";
 import supabase from "../../utils/supabase";
 import Card from "../Card";
+import Payment from "./Payment";
 
 const formatDate = (date) => {
   const options = {
@@ -37,14 +38,33 @@ const getTrainer = async (setTrainer) => {
   }
 };
 
+const bookSchedule = async (info) => {
+  const { error } = await supabase.from("trainer_booking").insert(info);
+  if (error) {
+    console.error(error);
+  }
+};
+
 const Schedule = () => {
+  const [user, setUser] = useState({ id: 1 });
+  const [error, setError] = useState(null);
   const [schedule, setSchedule] = useState([]);
   const [trainers, setTrainers] = useState([]);
   const [selectedTrainer, setSelectedTrainer] = useState(null);
-
+  const [bookingInfo, setBookingInfo] = useState(null);
+  const [paymentInfo, setPaymentInfo] = useState(null);
+  const [paymentConfirmation, setPaymentConfirmation] = useState(false);
   useEffect(() => {
     getTrainer(setTrainers);
   }, []);
+
+  const resetState = () => {
+    setSelectedTrainer(null);
+    setSchedule([]);
+    setBookingInfo(null);
+    setPaymentInfo(null);
+    setPaymentConfirmation(false);
+  };
 
   return (
     <div className="card-container">
@@ -61,16 +81,50 @@ const Schedule = () => {
       ))}
       {selectedTrainer && (
         <div className={"selectedTrainer"}>
-          {selectedTrainer.id}
-          <ul>
+          <div className={"trainer-info"}>
+            {selectedTrainer.id}{" "}
+            <h3>
+              {" "}
+              {selectedTrainer.first_name} {selectedTrainer.last_name}
+            </h3>
+          </div>
+          <ul className={"schedules"}>
             {schedule.map((schedule) => (
               <li key={schedule.id}>
-                {formatDate(schedule.available_start)} -
-                {formatDate(schedule.available_end)}
+                <button
+                  className={"schedule-button"}
+                  onClick={() => {
+                    const bookingInfo = {
+                      client_id: user.id,
+                      trainer_id: selectedTrainer.id,
+                      start_date: schedule.available_start,
+                      end_date: schedule.available_end,
+                    };
+                    const paymentInfo = {
+                      client_id: user.id,
+                      amount: 100.0,
+                      payment_type: "trainer-fee",
+                    };
+                    setPaymentConfirmation(true);
+                    setBookingInfo(bookingInfo);
+                    setPaymentInfo(paymentInfo);
+                  }}
+                >
+                  {formatDate(schedule.available_start)} -
+                  {formatDate(schedule.available_end)}
+                </button>
               </li>
             ))}
           </ul>
         </div>
+      )}
+      {paymentConfirmation && (
+        <Payment
+          handleStateReset={resetState}
+          confirmTransaction={() => bookSchedule(bookingInfo)}
+          setError={setError}
+          paymentInfo={paymentInfo}
+        ></Payment>
       )}
     </div>
   );
