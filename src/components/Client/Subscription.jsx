@@ -68,7 +68,7 @@ const Subscription = () => {
     <div className="subscription-container">
       <div className="subscription-list">
         <Card
-          optClass={`${user.membership_status}`}
+          optClass={`${user.membership_status !== "active" ? "" : "unavailable"} `}
           label="Annual Subscription + Monthly Plan"
           description={"$9999.99"}
           handleClick={() => {
@@ -98,6 +98,7 @@ const Subscription = () => {
           }}
         ></Card>
         <Card
+          optClass={`${user.membership_status === "active" ? "" : "unavailable"} `}
           label="Re-new Membership"
           description={"99.99"}
           handleClick={async () => {
@@ -137,6 +138,7 @@ const Subscription = () => {
           }}
         ></Card>
         <Card
+          optClass={`${user.membership_status == "active" ? "unavailable" : ""} `}
           label="Day Pass Membership"
           description={"9.99"}
           handleClick={async () => {
