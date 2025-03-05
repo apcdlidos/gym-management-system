@@ -1,6 +1,6 @@
 import "../styles/Card.css";
 
-const Card = ({ label, description, handleClick, optClass }) => {
+const Card = ({ label, description, handleClick, optClass = "" }) => {
   return (
     <div className={"card " + optClass}>
       <h2> {label}</h2>

@@ -46,7 +46,12 @@ const bookSchedule = async (info) => {
 };
 
 const Schedule = () => {
-  const [user, setUser] = useState({ id: 1 });
+  const [user, setUser] = useState({
+    id: 1,
+    first_name: "Ethan",
+    last_name: "Palconan",
+    membership_status: "none",
+  });
   const [error, setError] = useState(null);
   const [schedule, setSchedule] = useState([]);
   const [trainers, setTrainers] = useState([]);
@@ -67,12 +72,12 @@ const Schedule = () => {
   };
 
   return (
-    <div className="card-container">
+    <div className="schedule-container">
       {trainers.map((trainer) => (
         <Card
           key={trainer.id}
           label={trainer.first_name}
-          description={""}
+          description={`$${trainer.booking_rate} per session`}
           handleClick={() => {
             setSelectedTrainer(trainer);
             getSchedule(setSchedule, trainer.id);
@@ -88,7 +93,7 @@ const Schedule = () => {
               {selectedTrainer.first_name} {selectedTrainer.last_name}
             </h3>
           </div>
-          <ul className={"schedules"}>
+          <ul className={"schedule-list"}>
             {schedule.map((schedule) => (
               <li key={schedule.id}>
                 <button
@@ -102,7 +107,7 @@ const Schedule = () => {
                     };
                     const paymentInfo = {
                       client_id: user.id,
-                      amount: 100.0,
+                      amount: selectedTrainer.booking_rate,
                       payment_type: "trainer-fee",
                     };
                     setPaymentConfirmation(true);

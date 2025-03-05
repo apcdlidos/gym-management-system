@@ -2,11 +2,14 @@ import { useState, useEffect } from "react";
 import "../../styles/Dashboard.css";
 import Navbar from "../Navbar";
 import Schedule from "./Schedule";
+import Subscription from "./Subscription";
 
 const renderPage = (path) => {
   switch (path) {
     case "/schedule":
       return <Schedule />;
+    case "/subscription":
+      return <Subscription />;
     default:
       return <>Dashboard</>;
   }
@@ -50,6 +53,15 @@ const Dashboard = () => {
           }}
         >
           Trainer Schedules
+        </button>
+        <button
+          type=""
+          className="navbutton"
+          onClick={() => {
+            navigate(setCurrentPage, "/subscription");
+          }}
+        >
+          Subscription
         </button>
       </Navbar>
       <main>{renderPage(currentPage)} </main>

@@ -29,6 +29,7 @@ const Payment = ({
     <div className="payment-overlay">
       <div className="payment-modal">
         <h3>Payment Confirmation</h3>
+        <p> Amount: ${paymentInfo.amount}</p>
         <label htmlFor="credit-card">Credit Card</label>
         <input
           name="paymentMethod"
