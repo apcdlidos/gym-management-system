@@ -18,6 +18,16 @@ const fetchCurrentSubscription = async (client_id) => {
 };
 
 const availSubscription = async (subscription, info) => {
+  if (subscription == "day_pass") {
+    const { error } = await supabase.from(subscription).insert({ ...info });
+    if (error) {
+      console.error(error);
+    } else {
+      console.log("Successfully availed Day Pass Subscription");
+    }
+    return;
+  }
+
   const { error } = await supabase
     .from(subscription)
     .upsert({ ...info }, { onConflict: "client_id" });
@@ -124,6 +134,31 @@ const Subscription = () => {
             setSubscriptionInfo(monthlyInfo);
             setPaymentInfo(paymentInfo);
             setSelectedSubscription("membership");
+          }}
+        ></Card>
+        <Card
+          label="Day Pass Membership"
+          description={"9.99"}
+          handleClick={async () => {
+            const currentSubscription = await fetchCurrentSubscription(user.id);
+            if (user.membership_status == "active") {
+              console.log("Not applicable to current user");
+              return;
+            }
+
+            const dayPassInfo = {
+              client_id: user.id,
+            };
+
+            const paymentInfo = {
+              client_id: user.id,
+              amount: 9.99,
+              payment_type: "day-pass-fee",
+            };
+            setPaymentConfirmation(true);
+            setSubscriptionInfo(dayPassInfo);
+            setPaymentInfo(paymentInfo);
+            setSelectedSubscription("day_pass");
           }}
         ></Card>
       </div>
