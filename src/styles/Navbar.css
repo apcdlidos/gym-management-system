@@ -1,0 +1,29 @@
+.navbar {
+  height: 100%;
+  min-height: 100vh;
+  z-index: 9999;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--alt-background);
+  /* border: 1px solid blue; */
+  gap: 12px;
+}
+
+.navlink {
+  width: 100%;
+  list-style: none;
+  /* border: 1px solid green; */
+}
+
+.navbutton {
+  background: var(--alt-background);
+  border-radius: 0;
+  width: 100%;
+  color: var(--alt-text);
+}
+
+.navbutton:hover {
+  background: var(--shade);
+}

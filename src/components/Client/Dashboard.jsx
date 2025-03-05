@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
-import Schedule from "../components/Client/Schedule";
+import "../../styles/Dashboard.css";
+import Navbar from "../Navbar";
+import Schedule from "./Schedule";
 
 const renderPage = (path) => {
   switch (path) {
@@ -29,30 +31,28 @@ const Dashboard = () => {
   });
 
   return (
-    <div>
-      <ul>
-        <li>
-          <button
-            type=""
-            onClick={() => {
-              navigate(setCurrentPage, "/dashboard");
-            }}
-          >
-            Dashboard
-          </button>
-        </li>
-        <li>
-          <button
-            type=""
-            onClick={() => {
-              navigate(setCurrentPage, "/schedule");
-            }}
-          >
-            Schedule
-          </button>
-        </li>
-      </ul>
-      <div>{renderPage(currentPage)} </div>
+    <div className="container">
+      <Navbar>
+        <button
+          className="navbutton"
+          type=""
+          onClick={() => {
+            navigate(setCurrentPage, "/dashboard");
+          }}
+        >
+          Dashboard
+        </button>
+        <button
+          type=""
+          className="navbutton"
+          onClick={() => {
+            navigate(setCurrentPage, "/schedule");
+          }}
+        >
+          Schedule
+        </button>
+      </Navbar>
+      <main>{renderPage(currentPage)} </main>
     </div>
   );
 };
