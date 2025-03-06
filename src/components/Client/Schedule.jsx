@@ -91,75 +91,78 @@ const Schedule = () => {
     return <div>Loading...</div>; // or any other fallback UI
   }
   return user.membership_status == "active" ? (
-    <div className="schedule-container">
-      {trainers.map((trainer) => (
-        <Card
-          key={trainer.id}
-          label={trainer.first_name}
-          description={
-            <span className="schedule-description">
-              <span className="booking-rate">${trainer.booking_rate}</span>
-              <span className="specialization">{trainer.specialization}</span>
-              <span className="certification">{trainer.certification}</span>
-            </span>
-          }
-          optClass={"schedule-card"}
-          handleClick={() => {
-            setSelectedTrainer(trainer);
-            getSchedule(setSchedule, trainer.id);
-          }}
-        />
-      ))}
-      {selectedTrainer && (
-        <div className={"selected-trainer"}>
-          <div className={"trainer-info"}>
-            <p>{selectedTrainer.id}</p>
-            <h5>
-              {selectedTrainer.first_name} {selectedTrainer.last_name}
-            </h5>
-          </div>
-          <ul className={"schedule-list"}>
-            {schedule.map((schedule) => {
-              return (
-                <li key={schedule.id}>
-                  <button
-                    className={"schedule-button"}
-                    onClick={() => {
-                      const bookingInfo = {
-                        client_id: user.id,
-                        trainer_id: selectedTrainer.id,
-                        start_date: schedule.available_start,
-                        end_date: schedule.available_end,
-                      };
+    <>
+      <h2> Trainer Schedules</h2>
+      <div className="schedule-container">
+        {trainers.map((trainer) => (
+          <Card
+            key={trainer.id}
+            label={trainer.first_name}
+            description={
+              <span className="schedule-description">
+                <span className="booking-rate">${trainer.booking_rate}</span>
+                <span className="specialization">{trainer.specialization}</span>
+                <span className="certification">{trainer.certification}</span>
+              </span>
+            }
+            optClass={"schedule-card"}
+            handleClick={() => {
+              setSelectedTrainer(trainer);
+              getSchedule(setSchedule, trainer.id);
+            }}
+          />
+        ))}
+        {selectedTrainer && (
+          <div className={"selected-trainer"}>
+            <div className={"trainer-info"}>
+              <p>{selectedTrainer.id}</p>
+              <h5>
+                {selectedTrainer.first_name} {selectedTrainer.last_name}
+              </h5>
+            </div>
+            <ul className={"schedule-list"}>
+              {schedule.map((schedule) => {
+                return (
+                  <li key={schedule.id}>
+                    <button
+                      className={"schedule-button"}
+                      onClick={() => {
+                        const bookingInfo = {
+                          client_id: user.id,
+                          trainer_id: selectedTrainer.id,
+                          start_date: schedule.available_start,
+                          end_date: schedule.available_end,
+                        };
 
-                      const paymentInfo = {
-                        client_id: user.id,
-                        amount: selectedTrainer.booking_rate,
-                        payment_type: "trainer-fee",
-                      };
-                      setPaymentConfirmation(true);
-                      setBookingInfo(bookingInfo);
-                      setPaymentInfo(paymentInfo);
-                    }}
-                  >
-                    {formatDate(schedule.available_start)} -{" "}
-                    {formatDate(schedule.available_end)}
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      )}
-      {paymentConfirmation && (
-        <Payment
-          handleStateReset={resetState}
-          confirmTransaction={() => bookSchedule(bookingInfo)}
-          setError={setError}
-          paymentInfo={paymentInfo}
-        ></Payment>
-      )}
-    </div>
+                        const paymentInfo = {
+                          client_id: user.id,
+                          amount: selectedTrainer.booking_rate,
+                          payment_type: "trainer-fee",
+                        };
+                        setPaymentConfirmation(true);
+                        setBookingInfo(bookingInfo);
+                        setPaymentInfo(paymentInfo);
+                      }}
+                    >
+                      {formatDate(schedule.available_start)} -{" "}
+                      {formatDate(schedule.available_end)}
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+        {paymentConfirmation && (
+          <Payment
+            handleStateReset={resetState}
+            confirmTransaction={() => bookSchedule(bookingInfo)}
+            setError={setError}
+            paymentInfo={paymentInfo}
+          ></Payment>
+        )}
+      </div>
+    </>
   ) : (
     <div>Avail a membership to have personal training sessions</div>
   );
