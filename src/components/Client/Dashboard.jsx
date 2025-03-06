@@ -20,6 +20,7 @@ const renderPage = (path) => {
 const Default = () => {
   const { user } = useContext(UserContext);
   const [subscriptionInfo, setSubscriptionInfo] = useState(null);
+
   useEffect(() => {
     const fetchSubscription = async (setState) => {
       const { data: subscription, error } = await supabase
@@ -33,7 +34,7 @@ const Default = () => {
     };
 
     fetchSubscription(setSubscriptionInfo);
-  }, []);
+  }, [user]);
 
   if (!user) {
     return <div>Loading...</div>;
