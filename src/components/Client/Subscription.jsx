@@ -79,9 +79,20 @@ const Subscription = () => {
     <div className="subscription-container">
       <div className="subscription-list">
         <Card
-          optClass={`${user.membership_status !== "active" ? "" : "unavailable"} `}
-          label="Annual Subscription + Monthly Plan"
-          description={"$9999.99"}
+          optClass={`subscription-card ${user.membership_status !== "active" ? "" : "unavailable"} `}
+          label="Annual Subscription "
+          description={
+            <ul>
+              <li>Full access to all platform features for a year</li>
+              <li>Discounted rate compared to monthly payments</li>
+              <li>
+                Exclusive member-only benefits (e.g., free resources, priority
+                support)
+              </li>
+              <li>Auto-renewal option with reminder notifications</li>
+              <li>Flexible cancellation before renewal date</li>
+            </ul>
+          }
           handleClick={() => {
             if (user.membership_status == "active") {
               console.log("Not applicable to current user");
@@ -109,9 +120,18 @@ const Subscription = () => {
           }}
         ></Card>
         <Card
-          optClass={`${user.membership_status === "active" ? "" : "unavailable"} `}
+          optClass={`subscription-card ${user.membership_status === "active" ? "" : "unavailable"} `}
           label="Re-new Membership"
-          description={"99.99"}
+          description={
+            <ul>
+              <li>Seamless renewal process for existing members</li>
+              <li>
+                Option to continue at the same rate or upgrade/downgrade plan
+              </li>
+              <li>Early renewal discounts or incentives (if applicable)</li>
+              <li>Retain access to previous data and benefits upon renewal</li>
+            </ul>
+          }
           handleClick={async () => {
             if (
               user.membership_status == "expired" ||
@@ -149,9 +169,17 @@ const Subscription = () => {
           }}
         ></Card>
         <Card
-          optClass={`${user.membership_status == "active" ? "unavailable" : ""} `}
+          optClass={`subscription-card ${user.membership_status == "active" ? "unavailable" : ""} `}
           label="Day Pass Membership"
-          description={"9.99"}
+          description={
+            <ul>
+              <li>24-hour access to platform features</li>
+              <li>Ideal for short-term users or one-time access</li>
+              <li>No long-term commitment required</li>
+              <li>Pay-per-use model</li>
+              <li>Limited benefits compared to full subscriptions</li>
+            </ul>
+          }
           handleClick={async () => {
             if (user.membership_status == "active") {
               console.log("Not applicable to current user");

@@ -1,19 +1,82 @@
+.subscription-container {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+}
+
+.subscription-list {
+  margin: 24px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.subscription-card {
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  border-radius: 6px;
+  max-width: 300px;
+  width: 100%;
+  gap: 12px;
+  height: 360px;
+  border: 1px solid var(--shade);
+}
+
+.subscription-card h5 {
+  text-align: center;
+  align-self: center;
+}
+
+.subscription-card p {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.subscription-card ul {
+  max-width: 220px;
+}
+
+.subscription-card li {
+  font-size: 0.9rem;
+  font-family: Poppins;
+  font-weight: 400;
+  color: var(--alt-text);
+}
+
+.subscription-card button {
+  font-family: Poppins;
+  font-weight: 400;
+  letter-spacing: 1px;
+  background: var(--text);
+  padding: 15px;
+  color: var(--alt-background);
+}
+
 .unavailable {
   position: relative;
 }
 
 .unavailable::after {
+  border-radius: 6px;
   content: "Unavailable";
   font-size: 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
+  color: #f5ffffa5;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: #000000a5; /* Semi-transparent overlay */
+  font-family: Poppins;
+  background: linear-gradient(
+    #aeaeaa95,
+    #011111d5
+  ); /* Semi-transparent overlay */
   z-index: 9; /* Ensure the overlay is on top */
 }

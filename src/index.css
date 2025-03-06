@@ -7,16 +7,23 @@
 }
 
 :root {
-  --background: #e8f5f5;
+  --background: #e8f8f8;
   --text: #363636;
-  --alt-background: #f1fefe;
+  --alt-background: #edffff;
   --alt-text: #0527279f;
   --shade: #ccd8db;
-
   font-family: Helvetica;
   color-scheme: light dark;
   color: var(--text);
   background-color: var(--background);
+}
+
+main {
+  border-radius: 12px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  background: var(--alt-background);
+  margin: 12px auto;
+  width: 80%;
 }
 
 button {
