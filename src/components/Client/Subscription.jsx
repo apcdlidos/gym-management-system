@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
 import "../../styles/Subscription.css";
 import supabase from "../../utils/supabase";
 import Card from "../Card";
 import Payment from "./Payment";
+import { UserContext } from "../../App";
 
 const fetchCurrentSubscription = async (client_id) => {
   const { data: subscription, error } = await supabase
@@ -19,32 +20,38 @@ const fetchCurrentSubscription = async (client_id) => {
 
 const availSubscription = async (subscription, info) => {
   if (subscription == "day_pass") {
-    const { error } = await supabase.from(subscription).insert({ ...info });
-    if (error) {
-      console.error(error);
+    const { dayPassError } = await supabase
+      .from(subscription)
+      .insert({ ...info });
+    if (dayPassError) {
+      throw dayPassError;
     } else {
       console.log("Successfully availed Day Pass Subscription");
     }
     return;
   }
 
-  const { error } = await supabase
+  const { availError } = await supabase
     .from(subscription)
     .upsert({ ...info }, { onConflict: "client_id" });
-  if (error) {
-    console.error(error);
-  } else {
-    console.log("Successfully subscribed");
+  if (availError) {
+    throw availError;
   }
+
+  const { error: updateError } = await supabase
+    .from("subscription")
+    .update({ membership_status: "active" })
+    .eq("client_id", info.client_id);
+
+  if (updateError) {
+    throw updateError;
+  }
+
+  console.log("Successfully availed Membership Subscription");
 };
 
 const Subscription = () => {
-  const [user, setUser] = useState({
-    id: 1,
-    first_name: "Ethan",
-    last_name: "Palconan",
-    membership_status: "expired",
-  });
+  const user = useContext(UserContext);
   const [error, setError] = useState(null);
   const [selectedSubscription, setSelectedSubscription] = useState("");
   const [subscriptionInfo, setSubscriptionInfo] = useState(null);
@@ -63,6 +70,10 @@ const Subscription = () => {
     setPaymentConfirmation(false);
     setSelectedSubscription("");
   };
+
+  if (!user) {
+    return <div>Loading...</div>; // or any other fallback UI
+  }
 
   return (
     <div className="subscription-container">

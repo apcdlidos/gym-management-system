@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import "../../styles/Schedule.css";
 import supabase from "../../utils/supabase";
 import Card from "../Card";
 import Payment from "./Payment";
+import { UserContext } from "../../App";
 
 const formatDate = (date) => {
   const options = {
@@ -59,12 +60,13 @@ const bookSchedule = async (info) => {
 };
 
 const Schedule = () => {
-  const [user, setUser] = useState({
-    id: 1,
-    first_name: "Ethan",
-    last_name: "Palconan",
-    membership_status: "none",
-  });
+  // const [user, setUser] = useState({
+  //   id: 1,
+  //   first_name: "Ethan",
+  //   last_name: "Palconan",
+  //   membership_status: "active",
+  // });
+  const user = useContext(UserContext);
   const [error, setError] = useState(null);
   const [schedule, setSchedule] = useState([]);
   const [trainers, setTrainers] = useState([]);
@@ -72,6 +74,7 @@ const Schedule = () => {
   const [bookingInfo, setBookingInfo] = useState(null);
   const [paymentInfo, setPaymentInfo] = useState(null);
   const [paymentConfirmation, setPaymentConfirmation] = useState(false);
+
   useEffect(() => {
     getTrainer(setTrainers);
   }, []);
@@ -84,7 +87,10 @@ const Schedule = () => {
     setPaymentConfirmation(false);
   };
 
-  return (
+  if (!user) {
+    return <div>Loading...</div>; // or any other fallback UI
+  }
+  return user.membership_status == "active" ? (
     <div className="schedule-container">
       {trainers.map((trainer) => (
         <Card
@@ -148,6 +154,8 @@ const Schedule = () => {
         ></Payment>
       )}
     </div>
+  ) : (
+    <div>Avail a membership to access personal training sessions</div>
   );
 };
 
