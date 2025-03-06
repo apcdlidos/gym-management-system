@@ -1,12 +1,28 @@
-import { useState, Children } from "react";
+import { useContext, Children } from "react";
+import { UserContext } from "../App";
 import "../styles/Navbar.css";
+
 const Navbar = ({ children }) => {
+  const { user, setUser } = useContext(UserContext);
+
+  if (!user) {
+    return <div> Loading..</div>;
+  }
+
   return (
     <header className="navbar">
-      <h3 className="navtitle">Client</h3>
-      {Children.map(children, (child) => {
-        return <li className="navlink">{child}</li>;
-      })}
+      <div className="navtitle">
+        <small>Welcome!</small>
+        <h5>
+          {user.first_name} {user.last_name}
+        </h5>
+      </div>
+      <hr />
+      <div className="navlinks">
+        {Children.map(children, (child) => {
+          return <li className="navlink">{child}</li>;
+        })}
+      </div>
     </header>
   );
 };

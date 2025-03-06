@@ -66,7 +66,7 @@ const Schedule = () => {
   //   last_name: "Palconan",
   //   membership_status: "active",
   // });
-  const user = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [error, setError] = useState(null);
   const [schedule, setSchedule] = useState([]);
   const [trainers, setTrainers] = useState([]);
@@ -155,7 +155,7 @@ const Schedule = () => {
       )}
     </div>
   ) : (
-    <div>Avail a membership to access personal training sessions</div>
+    <div>Avail a membership to have personal training sessions</div>
   );
 };
 

@@ -39,9 +39,9 @@ const availSubscription = async (subscription, info) => {
   }
 
   const { error: updateError } = await supabase
-    .from("subscription")
+    .from("client")
     .update({ membership_status: "active" })
-    .eq("client_id", info.client_id);
+    .eq("id", info.client_id);
 
   if (updateError) {
     throw updateError;
@@ -51,7 +51,7 @@ const availSubscription = async (subscription, info) => {
 };
 
 const Subscription = () => {
-  const user = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [error, setError] = useState(null);
   const [selectedSubscription, setSelectedSubscription] = useState("");
   const [subscriptionInfo, setSubscriptionInfo] = useState(null);

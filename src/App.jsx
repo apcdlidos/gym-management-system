@@ -38,7 +38,7 @@ function App() {
   // };
 
   return user ? (
-    <UserContext.Provider value={user}>
+    <UserContext.Provider value={{ user, setUser }}>
       <Dashboard />
     </UserContext.Provider>
   ) : (
