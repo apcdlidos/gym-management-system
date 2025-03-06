@@ -17,11 +17,24 @@ const formatDate = (date) => {
 };
 
 const getSchedule = async (setSchedule, trainer_id) => {
+  const { data: trainer_booking } = await supabase
+    .from("trainer_booking")
+    .select("trainer_id, start_date, end_date, booking_status")
+    .eq("trainer_id", trainer_id)
+    .eq("booking_status", "active");
+
+  const bookedSchedule = trainer_booking
+    .map((item) => `${item.start_date}, ${item.end_date}`)
+    .join(", ");
+  console.log(bookedSchedule);
+
   const { data: schedule } = await supabase
     .from("schedule")
     .select()
-    .eq("trainer_id", trainer_id);
+    .eq("trainer_id", trainer_id)
+    .not("available_start, available_end", "in", `(${bookedSchedule})`);
 
+  console.log(schedule);
   if (schedule.length > 0) {
     setSchedule(schedule);
   } else {
@@ -94,32 +107,35 @@ const Schedule = () => {
             </h3>
           </div>
           <ul className={"schedule-list"}>
-            {schedule.map((schedule) => (
-              <li key={schedule.id}>
-                <button
-                  className={"schedule-button"}
-                  onClick={() => {
-                    const bookingInfo = {
-                      client_id: user.id,
-                      trainer_id: selectedTrainer.id,
-                      start_date: schedule.available_start,
-                      end_date: schedule.available_end,
-                    };
-                    const paymentInfo = {
-                      client_id: user.id,
-                      amount: selectedTrainer.booking_rate,
-                      payment_type: "trainer-fee",
-                    };
-                    setPaymentConfirmation(true);
-                    setBookingInfo(bookingInfo);
-                    setPaymentInfo(paymentInfo);
-                  }}
-                >
-                  {formatDate(schedule.available_start)} -
-                  {formatDate(schedule.available_end)}
-                </button>
-              </li>
-            ))}
+            {schedule.map((schedule) => {
+              return (
+                <li key={schedule.id}>
+                  <button
+                    className={"schedule-button"}
+                    onClick={() => {
+                      const bookingInfo = {
+                        client_id: user.id,
+                        trainer_id: selectedTrainer.id,
+                        start_date: schedule.available_start,
+                        end_date: schedule.available_end,
+                      };
+
+                      const paymentInfo = {
+                        client_id: user.id,
+                        amount: selectedTrainer.booking_rate,
+                        payment_type: "trainer-fee",
+                      };
+                      setPaymentConfirmation(true);
+                      setBookingInfo(bookingInfo);
+                      setPaymentInfo(paymentInfo);
+                    }}
+                  >
+                    {formatDate(schedule.available_start)} -
+                    {formatDate(schedule.available_end)}
+                  </button>
+                </li>
+              );
+            })}
           </ul>
         </div>
       )}

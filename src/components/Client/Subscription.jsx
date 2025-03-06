@@ -43,7 +43,7 @@ const Subscription = () => {
     id: 1,
     first_name: "Ethan",
     last_name: "Palconan",
-    membership_status: "none",
+    membership_status: "expired",
   });
   const [error, setError] = useState(null);
   const [selectedSubscription, setSelectedSubscription] = useState("");
@@ -102,15 +102,15 @@ const Subscription = () => {
           label="Re-new Membership"
           description={"99.99"}
           handleClick={async () => {
-            const currentSubscription = await fetchCurrentSubscription(user.id);
             if (
-              !currentSubscription ||
               user.membership_status == "expired" ||
               user.membership_status == "none"
             ) {
               console.log("Not applicable to current user");
               return;
             }
+
+            const currentSubscription = await fetchCurrentSubscription(user.id);
             const { monthly_due_date, has_paid, ...restInfo } =
               currentSubscription;
             await fetchCurrentSubscription(user.id);
@@ -142,7 +142,6 @@ const Subscription = () => {
           label="Day Pass Membership"
           description={"9.99"}
           handleClick={async () => {
-            const currentSubscription = await fetchCurrentSubscription(user.id);
             if (user.membership_status == "active") {
               console.log("Not applicable to current user");
               return;

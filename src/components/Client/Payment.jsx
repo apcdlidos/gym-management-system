@@ -17,6 +17,7 @@ const Payment = ({
       .insert({ ...paymentInfo, payment_method: selectedMethod });
     if (error) {
       console.error(error);
+      setError(error.message);
       return;
     }
     console.log("Payment successful");
