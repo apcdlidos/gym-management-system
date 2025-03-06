@@ -1,14 +1,12 @@
 .subscription-container {
   display: flex;
-  width: 100%;
-  max-width: 100%;
 }
 
 .subscription-list {
-  margin: 24px 24px;
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
+  width: 100%;
 }
 
 .subscription-card {

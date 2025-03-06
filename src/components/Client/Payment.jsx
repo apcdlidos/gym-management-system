@@ -27,52 +27,71 @@ const Payment = ({
   };
 
   return (
-    <div className="payment-overlay">
+    <div
+      onClick={(e) => {
+        if (e.target == e.currentTarget) {
+          handleStateReset();
+        }
+      }}
+      className="payment-overlay"
+    >
       <div className="payment-modal">
-        <h3>Payment Confirmation</h3>
-        <p> Amount: ${paymentInfo.amount}</p>
-        <label htmlFor="credit-card">Credit Card</label>
-        <input
-          name="paymentMethod"
-          onChange={(e) => {
-            console.log(e.target.id);
-            setSelectedMethod(e.target.id);
-          }}
-          type="radio"
-          id="credit-card"
-        />
+        <h4>Payment Confirmation</h4>
+        <div className="payment-info">
+          <p>Amount</p>
+          <h5>${paymentInfo.amount}</h5>
+        </div>
+        <div className="payment-options">
+          <label htmlFor="credit-card">
+            <input
+              name="paymentMethod"
+              onChange={(e) => {
+                console.log(e.target.id);
+                setSelectedMethod(e.target.id);
+              }}
+              type="radio"
+              id="credit-card"
+            />
+            Credit Card
+          </label>
 
-        <label htmlFor="debit-card">Debit Card</label>
-        <input
-          name="paymentMethod"
-          onChange={(e) => {
-            console.log(e.target.id);
-            setSelectedMethod(e.target.id);
-          }}
-          type="radio"
-          id="debit-card"
-        />
-        <label htmlFor="cash">Cash</label>
-        <input
-          name="paymentMethod"
-          onChange={(e) => {
-            console.log(e.target.id);
-            setSelectedMethod(e.target.id);
-          }}
-          type="radio"
-          id="cash"
-        />
-        <label htmlFor="e-wallet">E-Wallet</label>
-        <input
-          name="paymentMethod"
-          onChange={(e) => {
-            console.log(e.target.id);
-            setSelectedMethod(e.target.id);
-          }}
-          type="radio"
-          id="e-wallet"
-        />
-
+          <label htmlFor="debit-card">
+            <input
+              name="paymentMethod"
+              onChange={(e) => {
+                console.log(e.target.id);
+                setSelectedMethod(e.target.id);
+              }}
+              type="radio"
+              id="debit-card"
+            />
+            Debit Card
+          </label>
+          <label htmlFor="cash">
+            <input
+              name="paymentMethod"
+              onChange={(e) => {
+                console.log(e.target.id);
+                setSelectedMethod(e.target.id);
+              }}
+              type="radio"
+              id="cash"
+            />
+            Cash
+          </label>
+          <label htmlFor="e-wallet">
+            <input
+              name="paymentMethod"
+              onChange={(e) => {
+                console.log(e.target.id);
+                setSelectedMethod(e.target.id);
+              }}
+              type="radio"
+              id="e-wallet"
+            />
+            E-Wallet
+          </label>
+        </div>
         <button onClick={() => handlePayment()} className="payment-button">
           Confirm Payment
         </button>

@@ -12,7 +12,50 @@
 }
 
 .payment-modal {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 500px;
   position: relative;
   background: var(--background);
   padding: 10px 15px;
+  border-radius: 12px;
+}
+
+.payment-info {
+  color: #0a2f2f88;
+}
+
+.payment-info p {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.payment-info h5 {
+  font-weight: 500;
+}
+
+.payment-options {
+  color: var(--alt-text);
+  font-family: Poppins;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.payment-options input[type="radio"] {
+  accent-color: var(--alt-text);
+}
+
+.payment-options label {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.payment-button {
+  font-family: Poppins;
+  font-weight: 400;
+  padding: 12px;
 }

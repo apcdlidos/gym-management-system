@@ -1,9 +1,9 @@
 import { useState, useEffect, useContext } from "react";
-import "../../styles/Schedule.css";
 import supabase from "../../utils/supabase";
 import Card from "../Card";
 import Payment from "./Payment";
 import { UserContext } from "../../App";
+import "../../styles/Schedule.css";
 
 const formatDate = (date) => {
   const options = {
@@ -96,7 +96,14 @@ const Schedule = () => {
         <Card
           key={trainer.id}
           label={trainer.first_name}
-          description={`$${trainer.booking_rate} per session`}
+          description={
+            <span className="schedule-description">
+              <span className="booking-rate">${trainer.booking_rate}</span>
+              <span className="specialization">{trainer.specialization}</span>
+              <span className="certification">{trainer.certification}</span>
+            </span>
+          }
+          optClass={"schedule-card"}
           handleClick={() => {
             setSelectedTrainer(trainer);
             getSchedule(setSchedule, trainer.id);
@@ -104,13 +111,12 @@ const Schedule = () => {
         />
       ))}
       {selectedTrainer && (
-        <div className={"selectedTrainer"}>
+        <div className={"selected-trainer"}>
           <div className={"trainer-info"}>
-            {selectedTrainer.id}{" "}
-            <h3>
-              {" "}
+            <p>{selectedTrainer.id}</p>
+            <h5>
               {selectedTrainer.first_name} {selectedTrainer.last_name}
-            </h3>
+            </h5>
           </div>
           <ul className={"schedule-list"}>
             {schedule.map((schedule) => {
@@ -136,7 +142,7 @@ const Schedule = () => {
                       setPaymentInfo(paymentInfo);
                     }}
                   >
-                    {formatDate(schedule.available_start)} -
+                    {formatDate(schedule.available_start)} -{" "}
                     {formatDate(schedule.available_end)}
                   </button>
                 </li>

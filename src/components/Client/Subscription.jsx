@@ -80,7 +80,7 @@ const Subscription = () => {
       <div className="subscription-list">
         <Card
           optClass={`subscription-card ${user.membership_status !== "active" ? "" : "unavailable"} `}
-          label="Annual Subscription "
+          label="Annual Subscription"
           description={
             <ul>
               <li>Full access to all platform features for a year</li>
