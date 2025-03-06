@@ -11,3 +11,43 @@
   font-weight: 500;
   font-family: Poppins;
 }
+
+.default-container {
+  display: flex;
+  height: 90%;
+  width: 100%;
+  border-radius: 12px;
+  gap: 24px;
+  /* border: 1px solid var(--shade); */
+  /* background: var(--background); */
+}
+
+.default-container div {
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 6px;
+  display: flex;
+  min-width: 325px;
+  max-height: 180px;
+}
+.default-container span,
+.default-container p {
+  font-family: Poppins;
+  color: var(--alt-text);
+}
+
+.default-container span > p {
+  font-size: 0.68rem;
+  font-weight: 900;
+  color: #0527276f;
+  font-family: Helvetica;
+}
+
+.default-container div {
+  border-radius: 12px;
+  border: 1px solid var(--shade);
+  background: var(--background);
+  padding: 6px 12px;
+  width: fit-content;
+  height: fit-content;
+}

@@ -13,6 +13,7 @@
   padding: 12px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   flex-direction: column;
   border-radius: 6px;
   max-width: 300px;
@@ -25,13 +26,6 @@
 .subscription-card h5 {
   text-align: center;
   align-self: center;
-}
-
-.subscription-card p {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 .subscription-card ul {
@@ -65,7 +59,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #f5ffffa5;
+  color: #f5ffffb9;
   position: absolute;
   top: 0;
   left: 0;
@@ -73,8 +67,8 @@
   height: 100%;
   font-family: Poppins;
   background: linear-gradient(
-    #aeaeaa95,
-    #011111d5
+    #aeaeaa45,
+    #011111e5
   ); /* Semi-transparent overlay */
   z-index: 9; /* Ensure the overlay is on top */
 }

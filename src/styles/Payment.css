@@ -18,7 +18,7 @@
   justify-content: space-between;
   width: 500px;
   position: relative;
-  background: var(--background);
+  background: var(--alt-background);
   padding: 10px 15px;
   border-radius: 12px;
 }

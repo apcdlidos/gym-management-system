@@ -1,9 +1,9 @@
 import { useState, useContext } from "react";
-import "../../styles/Subscription.css";
 import supabase from "../../utils/supabase";
 import Card from "../Card";
 import Payment from "./Payment";
 import { UserContext } from "../../App";
+import "../../styles/Subscription.css";
 
 const fetchCurrentSubscription = async (client_id) => {
   const { data: subscription, error } = await supabase

@@ -164,7 +164,9 @@ const Schedule = () => {
       </div>
     </>
   ) : (
-    <div>Avail a membership to have personal training sessions</div>
+    <div className="avail-membership-message">
+      <h3>Avail a membership to have personal training sessions </h3>
+    </div>
   );
 };
 

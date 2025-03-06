@@ -62,12 +62,14 @@ hr {
   background: var(--alt-background);
   font-weight: 400;
   text-align: left;
-  border-radius: 6px;
+  border-radius: 3px;
   width: 100%;
   color: var(--alt-text);
+  border: 1px solid transparent;
 }
 
 .navbutton:hover {
+  border: 1px solid var(--shade);
   color: var(--text);
-  background: var(--shade);
+  background: var(--background);
 }

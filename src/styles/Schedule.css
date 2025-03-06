@@ -1,12 +1,10 @@
 .schedule-container {
-  height: 100%;
+  height: 90%;
   width: 100%;
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   justify-content: space-between;
 }
-
-
 
 /* .subscription-list { */
 /*   margin: 24px 24px; */
@@ -16,8 +14,7 @@
 /* } */
 /**/
 
-
-.schedule-container .schedule-card  {
+.schedule-container .schedule-card {
   padding: 12px 12px;
   display: flex;
   justify-content: space-between;
@@ -30,12 +27,12 @@
 }
 
 .schedule-card h5 {
-  margin:0;
+  margin: 0;
 }
 
 .schedule-description {
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
   font-family: Poppins;
 }
 
@@ -43,8 +40,9 @@
   font-size: 1.5rem;
   color: var(--alt-text);
 }
-.certification, .specialization {
-font-size: .9rem;
+.certification,
+.specialization {
+  font-size: 0.9rem;
 }
 
 .schedule-card button {
@@ -57,29 +55,28 @@ font-size: .9rem;
 }
 
 .selected-trainer {
-
   overflow-y: auto;
   border-radius: 6px;
   padding: 24px;
   border: 1px solid var(--shade);
-max-height: 300px;
+  max-height: 300px;
   width: 100%;
   justify-content: space-between;
   flex-direction: column;
   gap: 12px;
-  display:flex;
+  display: flex;
   background: var(--background);
 }
 
 .selected-trainer .trainer-info {
-display:flex;
-  align-items:center;
+  display: flex;
+  align-items: center;
   gap: 24px;
 }
 
 .trainer-info p {
-  align-content:center;
-  text-align:center;
+  align-content: center;
+  text-align: center;
   font-weight: 600;
   width: 30px;
   height: 30px;
@@ -89,85 +86,36 @@ display:flex;
   background: var(--shade);
 }
 
-
-.trainer-info  h5 {
-
-  font-family:Poppins;
+.trainer-info h5 {
+  font-family: Poppins;
   color: var(--alt-text);
   font-weight: 400;
 }
 
 .selected-trainer ul {
-  display:flex;
+  display: flex;
   max-width: inherit;
-  gap:12px;
+  gap: 12px;
   list-style: none;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
 }
 
-
-.schedule-button  {
-  font-family:Poppins;
-width: 380px;
+.schedule-button {
+  font-family: Poppins;
+  width: 380px;
   padding: 12px;
-  font-size: .9rem;
+  font-size: 0.9rem;
   font-weight: 500;
 }
 
-
-
-
-/**/
-/* .subscription-card h5 { */
-/*   text-align: center; */
-/*   align-self: center; */
-/* } */
-/**/
-/* .subscription-card p { */
-/*   display: flex; */
-/*   flex-direction: column; */
-/*   align-items: center; */
-/*   justify-content: center; */
-/* } */
-/**/
-
-/* .subscription-card li { */
-/*   font-size: 0.9rem; */
-/*   font-family: Poppins; */
-/*   font-weight: 400; */
-/*   color: var(--alt-text); */
-/* } */
-/**/
-/* .subscription-card button { */
-/*   font-family: Poppins; */
-/*   font-weight: 400; */
-/*   letter-spacing: 1px; */
-/*   background: var(--text); */
-/*   padding: 15px; */
-/*   color: var(--alt-background); */
-/* } */
-/**/
-/* .unavailable { */
-/*   position: relative; */
-/* } */
-/**/
-/* .unavailable::after { */
-/*   border-radius: 6px; */
-/*   content: "Unavailable"; */
-/*   font-size: 1.5rem; */
-/*   display: flex; */
-/*   justify-content: center; */
-/*   align-items: center; */
-/*   color: #f5ffffa5; */
-/*   position: absolute; */
-/*   top: 0; */
-/*   left: 0; */
-/*   width: 100%; */
-/*   height: 100%; */
-/*   font-family: Poppins; */
-/*   background: linear-gradient( */
-/*     #aeaeaa95, */
-/*     #011111d5 */
-/*   ); /* Semi-transparent overlay */ */
-/*   z-index: 9; /* Ensure the overlay is on top */ */
-/* } */
+.avail-membership-message {
+  display: flex;
+  height: 100%;
+  width: 40%;
+  color: var(--alt-text);
+  opacity: 0.5;
+  margin: auto;
+  text-align: center;
+  align-items: center;
+  justfiy-content: center;
+}
